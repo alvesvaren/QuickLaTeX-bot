@@ -15,7 +15,7 @@ default_data = {
     "errors": 1,
     "preamble": r"\usepackage{amsmath}\usepackage{amsfonts}\usepackage{amssymb}"
 }
-@bot.command(aliases=["l"])
+@bot.command(aliases=["l", "L"])
 async def latex(ctx: commands.Context, *, formula):
     async with aiohttp.ClientSession() as session:
         async with ctx.typing():
