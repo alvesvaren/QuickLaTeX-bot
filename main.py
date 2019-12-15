@@ -4,6 +4,9 @@ from discord.ext import commands
 
 bot = commands.Bot(command_prefix='$')
 
+with open("token.txt") as file:
+    token = file.read().strip()
+
 default_data = {
     "fsize": "25px",
     "fcolor": "cccccc", 
@@ -28,4 +31,4 @@ async def latex(ctx: commands.Context, *, formula):
                 embed.set_image(url=image_url)
                 await ctx.send(embed=embed)
 
-bot.run('NjU1NzAxOTQ3ODUyMTI4MjU2.XfX8Dg.XCp7jh0JraTPQF7cWNqVSS4-HmM')
+bot.run(token)
