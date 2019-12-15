@@ -14,3 +14,8 @@ A simple discord.py bot for displaying LaTeX-expressions in discord.
 2. `cd QuickLaTeX-bot`
 3. `pip install -r requirements.txt`
 4. `echo your-bot-token > token.txt`
+
+## Invite the bot
+
+Replace `client-id` in the link below:
+[https://discordapp.com/oauth2/authorize?client_id=client-id&scope=bot&permissions=52224](https://discordapp.com/oauth2/authorize?client_id=client-id&scope=bot&permissions=52224)
