@@ -25,6 +25,7 @@ async def latex(ctx: commands.Context, *, formula):
                 formula_data = (await response.text()).splitlines()
                 if int(formula_data[0]) != 0:
                     await ctx.send("That isn't a valid latex expression")
+                    await ctx.send(f"`{formula_data[2]}`")
                     return
                 image_url = formula_data[1].split()[0]
                 print("Sending", formula)
