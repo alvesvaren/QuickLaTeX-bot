@@ -63,4 +63,8 @@ async def latex(ctx: commands.Context, *, formula: str):
                 embed.set_image(url=image_url)
                 await ctx.send(embed=embed)
 
+@bot.event
+async def on_ready():
+    await bot.change_presence(activity=discord.Game(name="quicklatex.com"))
+
 bot.run(token)
