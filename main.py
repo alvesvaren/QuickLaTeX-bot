@@ -20,7 +20,7 @@ async def latex(ctx: commands.Context, *, formula):
     async with aiohttp.ClientSession() as session:
         async with ctx.typing():
             embed = discord.Embed()
-            embed.set_author(name=ctx.message.author.nick, icon_url=str(ctx.message.author.avatar_url))
+            embed.set_author(name=ctx.message.author.display_name, icon_url=str(ctx.message.author.avatar_url))
             async with session.post("https://www.quicklatex.com/latex3.f", data={"formula": formula.replace(" ", ""), **default_data}) as response:
                 formula_data = (await response.text()).splitlines()
                 if int(formula_data[0]) != 0:
