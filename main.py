@@ -4,6 +4,7 @@ from discord.ext import commands
 import multidict
 import aiohttp.payload as payload
 from urllib.parse import urlencode, quote
+import asyncio
 
 bot = commands.Bot(command_prefix='$')
 
@@ -44,7 +45,6 @@ class CustomFormData(aiohttp.FormData):
 @bot.command(aliases=["l", "L"])
 async def latex(ctx: commands.Context, *, formula: str):
     async with aiohttp.ClientSession() as session:
-
         async with ctx.typing():
             embed = discord.Embed()
             embed.set_author(name=ctx.message.author.display_name,
@@ -61,7 +61,14 @@ async def latex(ctx: commands.Context, *, formula: str):
                 image_url = formula_data[1].split()[0]
                 print("Sending", formula)
                 embed.set_image(url=image_url)
-                await ctx.send(embed=embed)
+                message: discord.Message = await ctx.send(embed=embed)
+        try:
+            before, after = await bot.wait_for("message_edit", check=lambda old, _: old.id == ctx.message.id, timeout=600)
+            await message.delete()
+            await bot.process_commands(after)
+        except asyncio.TimeoutError:
+            pass
+
 
 @bot.event
 async def on_ready():
